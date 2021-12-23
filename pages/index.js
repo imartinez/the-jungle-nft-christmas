@@ -15,7 +15,7 @@ import {
 
 export default function Home() {
 
-  const THE_JUNGLE_MINT_ADDRESS = 'H7HeDDfgQEs9Uc3xycb3xTHVHCchf7WA44WWRkREiNHe';
+  const THE_JUNGLE_UPDATE_AUTH = '86Go9CeoTmRvfSo821KFjPJbrnd46eYgAxQN8sQn6EVk';
 
   const [connection, setConnection] = useState('undefined');
   const [walletInitialized, setwalletInitialized] = useState(false);
@@ -73,7 +73,7 @@ export default function Home() {
     try {
         let ownerToken = provider.publicKey;
         const nfts = await getParsedNftAccountsByOwner({
-          publicAddress: ownerToken,
+          publicAddress: ownerToken,          
           connection: connection,
           serialization: true,
         });
@@ -90,8 +90,8 @@ export default function Home() {
       let n = data.length;      
       let animal_image;
       for (let i = 0; i < n; i++) {
-        console.log(data[i].mint);
-        if (data[i].mint == THE_JUNGLE_MINT_ADDRESS && data[i].data) {
+        console.log(data[i]);
+        if (data[i].updateAuthority == THE_JUNGLE_UPDATE_AUTH && data[i].data) {
           console.log(data[i].data.uri);
           //let val = await axios.get(data[i].data.uri);
           //arr.push(val);  
