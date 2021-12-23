@@ -11,7 +11,11 @@
   "dependencies": {
     "next": "12.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "@solana/web3.js": "^1.7.0",
+    "@solana/spl-token": "^0.1.8",
+    "@nfteyez/sol-rayz":"0.8.0",
+    "axios":"0.24.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
