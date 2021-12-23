@@ -90,14 +90,13 @@ export default function Home() {
       let n = data.length;      
       let animal_image;
       for (let i = 0; i < n; i++) {
-        console.log(data[i]);
-        if (data[i].updateAuthority == THE_JUNGLE_UPDATE_AUTH && data[i].data) {
-          console.log(data[i].data.uri);
+        if (data && data[i].updateAuthority == THE_JUNGLE_UPDATE_AUTH && data[i].data) {
           //let val = await axios.get(data[i].data.uri);
           //arr.push(val);  
+          //console.log(data[i].data.uri);
           animal_image = await axios.get(data[i].data.uri);
-          console.log(arr[0].data.image);
-          setImage(animal_image);
+          //console.log(animal_image.data.image);
+          setImage(animal_image.data.image);
           break;
         }
       }
@@ -112,11 +111,9 @@ export default function Home() {
 
   async function getBalance() {    
     if (connection && provider) {
-      console.log(provider);
       setWaiting(1);           
       let res = await getNftTokenData();
       setWaiting(0);   
-      console.log(res);  
       //setBalance(balance);
     }
   }
