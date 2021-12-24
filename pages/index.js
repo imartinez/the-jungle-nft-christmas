@@ -10,18 +10,21 @@ import {
   PublicKey,
 } from '@solana/web3.js';
 import { 
-  getParsedNftAccountsByOwner
+  getParsedNftAccountsByOwner,
+  createConnectionConfig
 } from "@nfteyez/sol-rayz";
 
 export default function Home() {
 
   const THE_JUNGLE_UPDATE_AUTH = '86Go9CeoTmRvfSo821KFjPJbrnd46eYgAxQN8sQn6EVk';
 
+  const connect = createConnectionConfig(clusterApiUrl('mainnet-beta'));
   const [connection, setConnection] = useState('undefined');
   const [walletInitialized, setwalletInitialized] = useState(false);
   const [provider, setProvider] = useState('undefined');
   const [waiting, setWaiting] = useState(0);
   const [image, setImage] = useState('undefined');
+  const [account, setAccount] = useState();
 
   async function connectButton() {
       const getProviderPhantom = async () => {
@@ -69,12 +72,23 @@ export default function Home() {
       }
   }
 
+  async function fetchButton() {
+    setWaiting(1);           
+    let res = await getNftTokenData();
+    setWaiting(0);   
+  }   
+
   const getAllNftData = async () => {
     try {
-        let ownerToken = provider.publicKey;
+        console.log(account);
+        if (!account) {
+          console.log('Account not defined');
+          return;
+        }
         const nfts = await getParsedNftAccountsByOwner({
-          publicAddress: ownerToken,          
-          connection: connection,
+          publicAddress: account,          
+          //publicAddress: new PublicKey('EbAmZRQCeGoJFwe3E3BwPYXgJu75LS9csWyNUnhvy8ez'),
+          connection: connect,
           serialization: true,
         });
         return nfts;
@@ -172,12 +186,15 @@ export default function Home() {
       );
     } else if (image != 'no_jungle') {
       return(
-      <div className={styles.button}>
-      <a onClick={connectButton}>Connect Phantom</a>
+      <div>
+        <p className={styles.description}>Get your personalized Christmas greeting!</p>
+        <input onChange={e => setAccount(e.target.value)} type="text" placeholder="Paste account address holding The Jungle NFTs"/>
+        <div className={account ? styles.button : styles.disabledbutton} onClick={fetchButton}>
+          <a>Get my Christmas greeting!</a>
+        </div>
       </div>
-    
       )
-    } else {
+    } else if (image == 'no_jungle') {
       return(
       <div>
       <p className={styles.description}>No animal found on the selected wallet!</p>

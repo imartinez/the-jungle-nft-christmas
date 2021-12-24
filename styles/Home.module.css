@@ -1,3 +1,13 @@
+.tablediv {
+  display: table;
+}
+
+.tablecell {
+  display: table-cell;
+  width: 100%;
+  padding: 0 20px;
+}
+
 .button{
                     outline: none;
                     text-align: center;
@@ -14,6 +24,26 @@
                     font-size: 20px;
                     margin-top: 20px;
                     margin-bottom: 20px;
+                    min-width: 400px;
+                }
+
+.disabledbutton{
+                    outline: none;
+                    text-align: center;
+                    cursor: pointer;
+                    font-size: 16px;
+                    line-height: 20px;
+                    font-weight: 600;
+                    border-radius: 8px;
+                    padding: 14px 24px;
+                    border: none;
+                    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+                    background: rgba(255, 255, 255, 0.5);
+                    color: rgba(255, 0, 0, 0.5);
+                    font-size: 20px;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    min-width: 400px;
                 }
 
 .window {
